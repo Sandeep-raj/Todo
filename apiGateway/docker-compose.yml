@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+  apigateway:
+    build: .
+    environment: 
+    - NODE_ENV=production
+    - AUTH_SERVICE=authservice
+    - GOOGLE_SERVICE=googleservice
+    ports:
+    - "5000:5000"
+
+networks: 
+  default:
+    external: 
+      name: todo

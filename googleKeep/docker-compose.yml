@@ -1,0 +1,23 @@
+version: "2"
+volumes: 
+  db:
+services:
+  googleservice:
+    build: .
+    environment: 
+    - NODE_ENV=production
+    ports:
+    - "3000:3000"
+    depends_on:
+    - mongodb
+  mongodb:
+    image: mongo
+    ports:
+    - "27018:27017"
+    volumes: 
+    - db:/data/db
+
+networks: 
+  default:
+    external: 
+      name: todo

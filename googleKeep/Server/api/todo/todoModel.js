@@ -7,7 +7,7 @@ var todoSchema = new Schema({
         required : true
     },
     contributors : [
-        { type : Schema.Types.ObjectId, ref : 'user'}
+        { type : Schema.Types.ObjectId}
     ],
 
     labels : [{type : Schema.Types.ObjectId, ref : 'label'}],

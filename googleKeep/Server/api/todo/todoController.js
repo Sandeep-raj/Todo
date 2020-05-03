@@ -2,7 +2,7 @@ const {todo} = require('./todoModel');
 
 exports.param = function(req,res,next,id){
     todo.findById(id)
-    .populate('contributors labels color')
+    .populate('labels color')
     .exec()
     .then(function(result){
         console.log(result);
@@ -14,8 +14,9 @@ exports.param = function(req,res,next,id){
 }
 
 exports.get = function(req,res,next){
+    console.log(req.user);
     todo.find({})
-    .populate('contributors labels color')
+    .populate('labels color')
     .exec()
     .then(function(result){
         res.json(result);

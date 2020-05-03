@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const {user} = require('../api/user/userModel');
+const {user} = require('./user/userModel');
 
 exports.decodeToken = function(req,res,next){
     if (req.headers.authorization !== undefined) {
@@ -22,10 +22,11 @@ exports.getUser = function(req,res,next){
     user.findById(req.user._id).then(
         function(result){
             if(!result){
-                res.status(401).send('Unauthorized');
+                res.status(401).send('Unauthorized - Invalid User Detail');
             }else{
-                req.user = result;
-                next();
+                // req.user = result;
+                // next();
+                res.status(200).send(result);
             }
         },
         function(err){
@@ -35,6 +36,7 @@ exports.getUser = function(req,res,next){
 }
 
 exports.verifyUser = function(req,res,next){
+    console.log('Hit');
     var username = req.body.username;
     var password = req.body.password;
 
